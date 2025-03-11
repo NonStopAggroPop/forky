@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+
+# Editor / IDE specific files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Log files
+logs/
+*.log
+
+# Pygame related (optional)
+*.wav
+*.ogg
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.gif
