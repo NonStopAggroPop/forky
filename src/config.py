@@ -11,7 +11,20 @@ PEDESTRIAN_COLOR = (64, 224, 208)
 FORKLIFT_SPEED = 4
 FORKLIFT_COLOR = (160, 4, 32)
 
-#Shelf config
+# Shelf config
 MIN_SHELVES = 10
 MAX_SHELVES = 30
 SHELF_COLOR = (110, 110, 110)
+
+# Difficulty settings
+INITIAL_PEDESTRIAN_SPEED = 1.5
+PEDESTRIAN_INCREMENT_SPEED = 0.2
+INITIAL_PEDESTRIAN_COUNT = 3
+PEDESTRIAN_INCREMENT_COUNT = 1
+
+# Safety Guard options
+SAFETY_GUARD_RADIUS = 100  # Effect radius
+SAFETY_GUARD_SLOWDOWN_FACTOR = 0.3  # Pedestrian speed reduction
+SAFETY_GUARD_FORKLIFT_SLOWDOWN = 0.4  # Forklift moves at 40% speed when active
+SAFETY_GUARD_DURATION = 4  # Active time in seconds
+SAFETY_GUARD_COOLDOWN = 10  # Cooldown time in seconds
