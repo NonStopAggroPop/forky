@@ -101,8 +101,7 @@ def main():
         forklift = Forklift(screen, show_game_over, shelves)
         package = Package(screen, shelves)
         drop_zone = DropZone(screen, shelves)
-        pedestrians = [Pedestrian(INITIAL_PEDESTRIAN_SPEED, screen, shelves, forklift)
-                       for _ in range(INITIAL_PEDESTRIAN_COUNT)]
+        pedestrians = [Pedestrian(INITIAL_PEDESTRIAN_SPEED, screen, shelves, forklift) for _ in range(INITIAL_PEDESTRIAN_COUNT)]
         running = True
 
         while running:
