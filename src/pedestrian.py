@@ -4,22 +4,22 @@ import math
 from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, PEDESTRIAN_COLOR
 
 class Pedestrian:
-    def __init__(self, speed, screen, shelves):
+    def __init__(self, speed, screen, shelves, forklift):
         self.screen = screen
         self.shelves = shelves  # Store shelves for collision checking
         self.speed = speed
-        self.rect = self.generate_valid_position()
+        self.rect = self.generate_valid_position(forklift)
         self.direction = random.choice([(1, 0), (-1, 0), (0, 1), (0, -1)])
 
-    def generate_valid_position(self):
-        """Find a valid position for the pedestrian that is not on a shelf."""
+    def generate_valid_position(self, forklift):
+        """Finds a valid position that does not collide with shelves or the forklift."""
         while True:
             x = random.randint(0, SCREEN_WIDTH - 20)
             y = random.randint(0, SCREEN_HEIGHT - 20)
             new_rect = pygame.Rect(x, y, 20, 20)
 
-            # Ensure the pedestrian does not spawn on a shelf
-            if all(not new_rect.colliderect(shelf.rect) for shelf in self.shelves):
+            if all(not new_rect.colliderect(shelf.rect) for shelf in self.shelves) and \
+               not new_rect.colliderect(forklift.rect):
                 return new_rect
 
     def is_in_safety_guard_zone(self, forklift, radius):

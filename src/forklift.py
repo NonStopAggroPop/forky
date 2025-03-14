@@ -1,13 +1,27 @@
 import pygame
+import random
 from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, FORKLIFT_COLOR, FORKLIFT_SPEED
 
 
 class Forklift:
-    def __init__(self, screen, game_over_callback):
-        self.rect = pygame.Rect(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 40, 40)
-        self.direction = (0, -1)
+    def __init__(self, screen, game_over_callback, shelves):
         self.screen = screen
-        self.game_over_callback = game_over_callback  # Speichert show_game_over()
+        self.game_over_callback = game_over_callback
+
+        # ✅ Ensure forklift spawns in a valid position
+        self.rect = self.get_valid_spawn_position(shelves)
+        self.direction = (0, -1)
+
+    def get_valid_spawn_position(self, shelves):
+        """Finds a valid spawn position that does not collide with shelves."""
+        while True:
+            rect = pygame.Rect(
+                random.randint(50, SCREEN_WIDTH - 90),
+                random.randint(50, SCREEN_HEIGHT - 90),
+                40, 40
+            )
+            if not any(rect.colliderect(shelf.rect) for shelf in shelves):
+                return rect
 
     def move(self, dx, dy, score):
         if dx != 0 and dy != 0:

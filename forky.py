@@ -97,11 +97,12 @@ def main():
     while True:
         score = 0
         safety_guard = {'active': False, 'on_cooldown': False, 'start_time': 0, 'cooldown_start': 0}
-        forklift = Forklift(screen, show_game_over)
         shelves = generate_shelves(screen)
+        forklift = Forklift(screen, show_game_over, shelves)
         package = Package(screen, shelves)
         drop_zone = DropZone(screen, shelves)
-        pedestrians = [Pedestrian(INITIAL_PEDESTRIAN_SPEED, screen, shelves) for _ in range(INITIAL_PEDESTRIAN_COUNT)]
+        pedestrians = [Pedestrian(INITIAL_PEDESTRIAN_SPEED, screen, shelves, forklift)
+                       for _ in range(INITIAL_PEDESTRIAN_COUNT)]
         running = True
 
         while running:
@@ -109,6 +110,10 @@ def main():
                 score += 1
                 package = Package(screen, shelves)
                 drop_zone = DropZone(screen, shelves)
+
+                # create new pedestrian with level up
+                pedestrians.append(Pedestrian(INITIAL_PEDESTRIAN_SPEED, screen, shelves, forklift))
+
             update_safety_guard(safety_guard)
             update_pedestrians(pedestrians, forklift, safety_guard)
 
